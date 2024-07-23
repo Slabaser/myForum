@@ -1,0 +1,30 @@
+<style>
+    .custom-link {
+        text-decoration: none; /* Altı çizili yapma */
+        color: #37628d; /* Güzel bir mavi renk */
+        font-family: 'Helvetica', sans-serif; /* Font stili */
+        font-weight: bold; /* Kalın yazı */
+        transition: color 0.3s ease; /* Hover sırasında renk geçişi için */
+    }
+    
+    .custom-link:hover {
+        color: #021f3b; /* Hover sırasında koyu bir renk */
+    }
+
+    h3{
+        font-family: 'Helvetica', sans-serif;
+    
+    }
+    .custom-link.active {
+        color: #ff6347;
+    }
+</style>
+        <h3>🌐Browse Topics</h3>     
+        <hr>
+        <a href="{% url 'home'%}" class="custom-link">📍All</a>
+        {% for topic in topics %}
+        <div>
+            <a href="{% url 'home'%}?q={{topic.name}}"class="custom-link">📍{{topic}}</a>
+        </div>
+        {% endfor %}
+  
