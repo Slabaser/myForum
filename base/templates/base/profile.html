@@ -1,0 +1,72 @@
+{% extends 'main.html'%}
+
+{% block content %}
+
+<style>
+    .profile-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr ;
+        gap: 40px;
+        font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    }
+    .btn-custom {
+        border-radius: 25px; /* Kenarları yuvarlak yapmak için */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Geçiş efekti eklemek için */
+        border: 3px solid #cfd0d3;
+        font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    }
+
+    .btn-custom:hover {
+         /* Hover durumunda arka plan rengini değiştirmek için */
+        color: #000; /* Hover durumunda yazı rengini değiştirmek için */
+        border-color: #6c757d;
+    }
+    profile-avatar {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+</style>
+<span class="avatar"><i class="fas fa-user"></i>
+<div class="d-flex justify-content-center">
+<div style= "font-family: Mona Sans, Helvetica Neue, Helvetica, Arial, sans-serif" >
+    <h1>{{user.username}} 
+        {% if user == request.user%}
+        <a href="{% url 'edit-profile' user.profile.id %}">
+            <button type="button" class="btn btn-light btn-custom ml-3">Edit Profile 🧑‍🎨</button>
+        </a>
+        {% endif%}</h1>
+    {% if user.profile.bio %}
+        <p style="font-style: italic;">"{{ user.profile.bio }}"</p>
+        {% endif %}
+    {% if user.profile.job_title %}
+        <p> 👩‍🎓 {{ user.profile.job_title }}</p>
+        {% endif %}
+        {% if user.profile.location %}
+        <p> 🗺️ {{ user.profile.location }}</p>
+        {% endif %}
+       
+       {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="Profile Picture" class="profile-avatar">
+       {% endif %}
+    
+</div>
+</div>
+<hr>
+<div class="profile-container"> 
+    <div style="padding-left: 20px;">
+        {% include 'base/topics_component.html'%}
+    </div>
+
+    <div >
+        {% include 'base/feed_component.html'%}
+    </div>
+
+    <div style="margin-right: 20px;">
+        {% include 'base/activity_component.html'%}
+    </div>
+</div>
+{% endblock content %} 

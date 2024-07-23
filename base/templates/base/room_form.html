@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>
+                {% if form.instance.pk %}
+                    Edit Room
+                {% else %}
+                    Create a Room
+                {% endif %}
+            </h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-group mt-3">
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

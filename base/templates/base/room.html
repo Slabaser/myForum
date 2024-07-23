@@ -1,0 +1,88 @@
+
+{% extends "main.html" %}
+ {% block content %}
+ <style>
+    input::placeholder {
+    font-size: 13px; 
+    color: gray; 
+}
+
+    h1 {
+    padding-left: 20px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    
+  }
+  a.custom-linko {
+        text-decoration: none; /* Altı çizili yapma */
+        color: #484caf; /* Güzel bir mavi renk */
+        font-family: "Arial", sans-serif;
+        font-weight: bold; /* Kalın yazı */
+        transition: color 0.3s ease; /* Hover sırasında renk geçişi için */
+    }
+    
+    a.custom-linko:hover {
+        color: #8baac6; /* Hover sırasında koyu bir renk */
+    }
+</style>
+
+<style>
+    .room-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 40px;
+    }
+</style>
+<div class="room-container">
+    <div>
+
+    
+<h1>{{room.name}}</h1>
+
+<p style="padding-left: 20px;">{{room.description}}
+
+ <div class="comment-wrapper" style="padding-left: 20px;">
+    <h3>conversation</h3>
+    <hr>
+    {% for message in room_messages %}
+    <div class="d-flex justify-content-between">
+        <small ><a href="{% url 'user-profile' message.user.id %}" class="custom-linko">@{{message.user}}</a>    {{message.created|timesince}} ago</small>
+        <div class="d-flex justify-content-end">
+            {% if request.user == message.user %}
+            <a href="{% url 'update-message' message.id %}" class="btn btn-outline">✍️</a>
+            <a href="{% url 'delete-message' message.id %}" class="btn btn-outline">🗑️</a>
+            {% endif %}</div>   
+    </div>
+    <p>{{message.body}}</p>
+        <hr>
+    {% endfor %}
+ </div>   
+
+ {% if request.user.is_authenticated%}
+ <div class="comment-form mb-3 comment-form-sm">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="input-group" style="padding-left: 20px;" font->
+            <input type="text" class="form-control" name="body" placeholder="Write your message here...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Send</button>
+            </div>
+        </div>
+
+    </form>
+
+ </div>
+ {% endif %}
+</div>
+<div>
+    <h3>Participants</h3>
+    <hr>
+
+    {% for user in participants %}
+    <div >
+        <a href="{% url 'user-profile' user.id %}" class="custom-linko">@{{user.username}}</a>
+    </div>
+
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

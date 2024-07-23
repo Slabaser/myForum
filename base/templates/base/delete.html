@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="text-center">Confirm Delete</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <p class="text-center">Are you sure you want to delete "{{ obj }}"?</p>
+                        <div class="d-flex justify-content-center" style="gap: 20px">
+                            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary mr-2">Go Back</a>
+                            <input type="submit" value="Confirm" class="btn btn-danger"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
