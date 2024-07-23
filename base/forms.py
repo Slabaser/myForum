@@ -7,6 +7,7 @@ class RoomForm(ModelForm):
     class Meta:
         model = Room
         fields = ['topic', 'name', 'description']
+        print(fields)
 
 class MessageForm(ModelForm):
     class Meta:
