@@ -6,9 +6,7 @@ This project is a web application that allows users to create rooms and discuss 
         <li><a href="#getting-started">Getting Started</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
-        <li><a href="#project-structure">Project Structure</a></li>
-        <li><a href="#contributing">Contributing</a></li>
-        <li><a href="#license">License</a></li>
+        
 </ul>
 <h2 id="getting-started">Getting Started</h2>
 <p>This guide provides instructions on how to set up and run the project on your local machine.</p>
